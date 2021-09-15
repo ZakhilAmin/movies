@@ -4,16 +4,24 @@ import Like from './common/like';
 import Pagination from './common/pagination';
 
 import { Paginate } from './../utils/paginate';
+import ListGroup from './common/listGroup';
+import { getGenres } from '../services/fakeGenreService';
 
 
 class Movies extends React.Component {
 
      state = {
-        movies : getMovies(),
+        movies : [],
+        genres: [],
         currentPage: 1,
-        pageSize: 4
+        pageSize: 4,
+        selectedGenres:null
+        
      }
 
+     componentDidMount(){
+         this.setState({movies: getMovies(), genres:getGenres()})
+     }
      handleDelete = (movie)=>{
          const movies = this.state.movies.filter(m=>m._id !== movie._id);
          this.setState({movies})
@@ -30,18 +38,31 @@ class Movies extends React.Component {
      handlePagechange = page =>{
          this.setState({currentPage: page})
      }
+     handleGenreSelect =(genre)=>{
+         this.setState({selectedGenres: genre})
+     }
     render() { 
         const {length:count } = this.state.movies;
-        const {pageSize, currentPage, movies: allMovies } = this.state
+        const {pageSize, currentPage, movies: allMovies, selectedGenres } = this.state
 
-        const movies = Paginate(allMovies, currentPage, pageSize);
+        const filtered = selectedGenres ? allMovies.filter(m=>m.genre._id === selectedGenres._id): allMovies;
+        const movies = Paginate(filtered, currentPage, pageSize);
 
 
         if(count === 0) 
             return <p> There is no movie in the list</p>
 
-        return <div>
-            <p>Showing {count} movies</p>
+        return (
+        <div className="row">
+            <div className="col-3">
+                <ListGroup 
+                items ={this.state.genres} 
+                onItemSelect={this.handleGenreSelect}
+                selectedItem={selectedGenres}
+                />
+            </div>
+            <div className="col">
+            <p>Showing {filtered.length} movies</p>
                     <table className="table">
                         <thead className="thead-dark">
                             <tr>
@@ -54,7 +75,7 @@ class Movies extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {movies.map(movie=>
+                            {filtered.map(movie=>
                                 <tr key={movie._id}>     
                                 <td>{movie.title}</td>
                                 <td>{movie.genre.name}</td>
@@ -71,10 +92,14 @@ class Movies extends React.Component {
                     </table>
                     <Pagination 
                     pageSize={pageSize} 
-                    itemsCount={count} 
+                    itemsCount={filtered.length} 
                     currentPage ={currentPage}
                     onPageChange={this.handlePagechange} />
-        </div>;
+            </div>
+        </div>
+      
+        )
+        
     }
 }
  
