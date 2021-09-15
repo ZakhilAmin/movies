@@ -1,10 +1,10 @@
 import React from 'react';
 
-class Like  extends React.Component {
-    render() { 
-        const {onLike,Id} =this.props;
+const Like = (props) => {
+  
+        const {onLike} =props;
         let classes = "fa fa-heart";
-        if(!this.props.liked) classes +="-o";
+        if(!props.liked) classes +="-o";
 
         return(
         <div>
@@ -13,6 +13,7 @@ class Like  extends React.Component {
         </div>
         )
     }
-}
+
  
-export default Like ;
+export default Like;
+
