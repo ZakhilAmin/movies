@@ -8,6 +8,8 @@ import ListGroup from './common/listGroup';
 import { getGenres } from '../services/fakeGenreService';
 
 
+
+
 class Movies extends React.Component {
 
      state = {
@@ -20,7 +22,8 @@ class Movies extends React.Component {
      }
 
      componentDidMount(){
-         this.setState({movies: getMovies(), genres:getGenres()})
+         const genres =[{name:'All Genres'},...getGenres()]
+         this.setState({movies: getMovies(), genres})
      }
      handleDelete = (movie)=>{
          const movies = this.state.movies.filter(m=>m._id !== movie._id);
@@ -39,13 +42,13 @@ class Movies extends React.Component {
          this.setState({currentPage: page})
      }
      handleGenreSelect =(genre)=>{
-         this.setState({selectedGenres: genre})
+         this.setState({selectedGenres: genre, currentPage:1})
      }
     render() { 
         const {length:count } = this.state.movies;
         const {pageSize, currentPage, movies: allMovies, selectedGenres } = this.state
 
-        const filtered = selectedGenres ? allMovies.filter(m=>m.genre._id === selectedGenres._id): allMovies;
+        const filtered = selectedGenres && selectedGenres._id ? allMovies.filter(m=>m.genre._id === selectedGenres._id): allMovies;
         const movies = Paginate(filtered, currentPage, pageSize);
 
 
@@ -75,7 +78,7 @@ class Movies extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {filtered.map(movie=>
+                            {movies.map(movie=>
                                 <tr key={movie._id}>     
                                 <td>{movie.title}</td>
                                 <td>{movie.genre.name}</td>
