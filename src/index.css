@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding-top: 20px;
+  padding-top: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -14,4 +14,11 @@ code {
 }
 .clickable {
   cursor: pointer;
+}
+.navbar navbar-light bg-primary {
+  padding-bottom: 20px 20px 20px 20px;
+}
+
+.navbar {
+  margin-bottom: 30px;
 }
