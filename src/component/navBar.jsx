@@ -24,18 +24,6 @@ const NavBar = () => {
                 </ul>
             </div>
             </nav>
-//         <div style={{padding: '0 0 20px'}}>
-//             <nav className="navbar navbar-light bg-primary">
-            
-//                 <div> 
-//                      <NavLink style={{color: 'white', padding: '30px 30px 10px 30px'}}className="navbar-brand" to="/">Home</NavLink>
-//                      <NavLink style={{color: 'white', padding: '30px 30px 10px 30px'}} className="navbar-brand" to="/movies">Movies</NavLink>
-//                      <NavLink style={{color: 'white', padding: '30px 30px 10px 30px'}}className="navbar-brand" to="/product">Product </NavLink>
-//                      <NavLink style={{color: 'white' , padding: '30px 30px 10px 30px'}}className="navbar-brand" to="/admin">Dashboard</NavLink>
-//                 </div>
-        
-//         </nav> 
-//   </div>
 );
 }
  
