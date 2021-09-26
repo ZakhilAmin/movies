@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
                 <Input value={account.username} errors={errors.username} autoFocus onChange={this.handlChanged} id="username" type="text" label="User" name="username" />
                 <Input value={account.password}  errors={errors.password} onChange={this.handlChanged} type="text" id="password" label="Password" name="password" />
                 
-                <button className="btn btn-primary">Login</button>
+                <button disabled ={this.validate()} className="btn btn-primary">Login</button>
             </form>
         </div>);
     }
