@@ -9,6 +9,7 @@ import Rentals from './component/rentals';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import React from 'react';
 import LoginForm from './component/loginForm';
+import Register from './component/Register';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/movies" component={Movies} />
           <Route path="/customers" component ={Customers} />
           <Route path="/rentals" component={Rentals}/>
+          <Route path="/Registers" component={Register} />
           <Route path="/not-found" component={NotFound}/>
           <Redirect from="/" exact to="/movies" />
           <Redirect to="/not-Found" />
