@@ -1,6 +1,6 @@
 import React from 'react';
 import { getMovies } from './../services/fakeMovieService';
-
+import { Link } from 'react-router-dom';
 import Pagination from './common/pagination';
 
 import { Paginate } from './../utils/paginate';
@@ -66,7 +66,9 @@ class Movies extends React.Component {
 
         return {totalCount: filtered.length, data: movies}
      }
-
+     onNewMovie = () =>{
+        console.log("Added New movie")
+     }
     render() { 
         const {length:count } = this.state.movies;
         const {pageSize, currentPage,  selectedGenres, sortColumn } = this.state
@@ -88,6 +90,9 @@ class Movies extends React.Component {
             </div>
             <div className="col">
             <p>Showing {totalCount} movies</p>
+            <Link className="btn btn-primary" style={{marginBottom: "20px"}} to="/movies/new">
+                New Movies
+            </Link>
                    <MoviesTable 
                    movies={movies} 
                    sortColumn = {sortColumn}
